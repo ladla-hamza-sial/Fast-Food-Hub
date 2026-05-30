@@ -1,11 +1,11 @@
 package com.ladla.foodapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +36,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.imgFood.setImageResource(item.getImageResource());
 
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "You selected: " + item.getName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), DetailActivity.class);
+            intent.putExtra("name", item.getName());
+            intent.putExtra("price", item.getPrice());
+            intent.putExtra("description", item.getDescription());
+            intent.putExtra("image", item.getImageResource());
+            v.getContext().startActivity(intent);
         });
     }
 
